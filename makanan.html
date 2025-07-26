@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cita Rasa Sumatera</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f0f4f8;
+            color: #2d3748;
+        }
+
+        header {
+            background-color: #3498db;
+            color: white;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+        .nav-button {
+            background-color: white;
+            color: #3498db;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.8;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .food-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .food-card {
+            background-color: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+
+        .food-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .food-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .food-info {
+            padding: 1.5rem;
+        }
+
+        .food-name {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #2d3748;
+        }
+
+        .food-description {
+            font-size: 0.9rem;
+            color: #4a5568;
+            line-height: 1.6;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.8);
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 5% auto;
+            padding: 2rem;
+            border-radius: 15px;
+            max-width: 800px;
+            width: 90%;
+            position: relative;
+        }
+
+        .close {
+            color: #aaa;
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #000;
+            text-decoration: none;
+        }
+
+        .slideshow-container {
+            position: relative;
+            margin-bottom: 1rem;
+        }
+
+        .mySlides {
+            display: none;
+        }
+
+        .mySlides img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        .prev, .next {
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            width: auto;
+            padding: 16px;
+            margin-top: -22px;
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+            transition: 6s ;
+            border-radius: 0 3px 3px 0;
+            user-select: none;
+            background-color: rgba(0,0,0,0.8);
+        }
+
+        .next {
+            right: 0;
+            border-radius: 3px 0 0 3px;
+        }
+
+        .prev:hover, .next:hover {
+            background-color: rgba(0,0,0,0.9);
+        }
+
+        #modalFoodName {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: #2d3748;
+        }
+
+        #modalFoodDescription {
+            font-size: 1rem;
+            line-height: 1.8;
+            color: #4a5568;
+        }
+
+        @media (max-width: 768px) {
+            .food-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        footer {
+            background-color: #243642;
+            color: #fff;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        
+        <h1>Cita Rasa Sumatera</h1>
+        <nav class="nav-buttons">
+            <a href="profil.html" class="nav-button">Profil</a>
+            <a href="index.html" class="nav-button">Beranda</a>
+        </nav>
+    </header>
+    <div class="container">
+        <main class="food-grid" id="foodGrid">
+            <!-- Food cards will be dynamically added here -->
+        </main>
+    </div>
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div class="slideshow-container">
+                <!-- Slides will be dynamically added here -->
+            </div>
+            <h2 id="modalFoodName"></h2>
+            <p id="modalFoodDescription"></p>
+        </div>
+    </div>
+    <script>
+        const foods = [
+            {
+                name: "Rendang",
+                images: ["Aset/rendang1.jpg", "Aset/rendang2.jpg", "Aset/rendang3.webp"],
+                description: "Rendang adalah masakan daging dengan bumbu rempah-rempah yang berasal dari Minangkabau. Proses memasaknya memakan waktu berjam-jam hingga yang tersisa hanyalah potongan daging berwarna hitam pekat dan dedak. Hidangan ini terkenal karena cita rasanya yang kaya dan aromanya yang menggugah selera."
+            },
+            {
+                name: "Pempek",
+                images: ["Aset/pempek1.webp", "Aset/pempek2.jpg", "Aset/pempek3.jpg"],
+                description: "Pempek atau empek-empek adalah makanan khas Palembang yang terbuat dari daging ikan yang digiling lembut dan tepung kanji, dengan tambahan telur, bawang putih halus, penyedap rasa dan garam. Pempek biasanya disajikan dengan kuah cuko, saus yang terbuat dari gula merah, cabe, dan cuka, menciptakan perpaduan rasa yang unik."
+            },
+            {
+                name: "Mie Aceh",
+                images: ["Aset/mieaceh1.jpg", "Aset/mieaceh2.webp", "Aset/mieaceh3.jpeg"],
+                description: "Mie Aceh adalah masakan mie pedas khas Aceh di Indonesia. Mie kuning tebal dengan irisan daging sapi, daging kambing atau seafood disajikan dalam sup sejenis kari yang gurih dan pedas. Hidangan ini terkenal karena rasa rempahnya yang kuat dan tingkat kepedasannya yang bisa disesuaikan."
+            },
+            {
+                name: "Gulai Ikan Patin",
+                images: ["Aset/gulai1.jpg", "Aset/gulai2.jpg", "Aset/gulai3.jpg"],
+                description: "Gulai Ikan Patin adalah masakan yang populer di Jambi dan Riau. Ikan patin dimasak dengan kuah santan yang kental dan bumbu rempah yang kaya, menciptakan cita rasa yang lezat dan gurih. Hidangan ini sering disajikan dengan nasi putih panas dan lalapan, menjadikannya pilihan favorit untuk makan siang atau makan malam."
+            }
+        ];
+
+        const foodGrid = document.getElementById('foodGrid');
+        const modal = document.getElementById('myModal');
+        const closeBtn = document.getElementsByClassName('close')[0];
+        const modalFoodName = document.getElementById('modalFoodName');
+        const modalFoodDescription = document.getElementById('modalFoodDescription');
+        const slideshowContainer = document.querySelector('.slideshow-container');
+
+        let slideIndex = 1;
+
+        foods.forEach((food, index) => {
+            const foodCard = document.createElement('div');
+            foodCard.className = 'food-card';
+            foodCard.innerHTML = `
+                <img src="${food.images[0]}" alt="${food.name}" class="food-image">
+                <div class="food-info">
+                    <div class="food-name">${food.name}</div>
+                    <div class="food-description">${food.description.substring(0, 100)}...</div>
+                </div>
+            `;
+            foodCard.addEventListener('click', () => openModal(index));
+            foodGrid.appendChild(foodCard);
+        });
+
+        function openModal(index) {
+            const food = foods[index];
+            modalFoodName.textContent = food.name;
+            modalFoodDescription.textContent = food.description;
+            
+            slideshowContainer.innerHTML = '';
+            food.images.forEach((img, i) => {
+                const slide = document.createElement('div');
+                slide.className = 'mySlides';
+                slide.innerHTML = `<img src="${img}" alt="${food.name} - Image ${i+1}">`;
+                slideshowContainer.appendChild(slide);
+            });
+
+            const prevButton = document.createElement('a');
+            prevButton.className = 'prev';
+            prevButton.innerHTML = '&#10094;';
+            prevButton.onclick = () => plusSlides(-1);
+
+            const nextButton = document.createElement('a');
+            nextButton.className = 'next';
+            nextButton.innerHTML = '&#10095;';
+            nextButton.onclick = () => plusSlides(1);
+
+            slideshowContainer.appendChild(prevButton);
+            slideshowContainer.appendChild(nextButton);
+
+            slideIndex = 1;
+            showSlides(slideIndex);
+
+            modal.style.display = 'block';
+        }
+
+        function plusSlides(n) {
+            showSlides(slideIndex += n);
+        }
+
+        function showSlides(n) {
+            const slides = document.getElementsByClassName("mySlides");
+            if (n > slides.length) {slideIndex = 1}
+            if (n < 1) {slideIndex = slides.length}
+            for (let i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+            slides[slideIndex-1].style.display = "block";
+        }
+
+        closeBtn.onclick = function() {
+            modal.style.display = 'none';
+        }
+
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+<footer>
+    <p>&copy; 2024 Pulau Sumatera. Erlan E.P.S</p>
+</footer>
+</html>

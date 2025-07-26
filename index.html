@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pulau Sumatera</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    :root{
+        --secondary-color: #e67e22;
+    }
+     * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+        .nav-button {
+            background-color: white;
+            color: #3498db;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .index-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .index-item {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .index-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+        }
+        
+        .index-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .index-info {
+            padding: 1.5rem;
+        }
+        
+        .index-info h2 {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+        
+        .index-deskripsi p {
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            text-decoration: none;
+            margin-top: 1rem;
+            transition: background-color 0.3s ease;
+        }
+        
+        .btn:hover {
+            background-color: #d35400;
+        }
+        footer {
+            background-color: #243642;
+            color: #fff;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+        .description {
+            margin-top: 2em;
+            text-align: justify;
+        }
+  </style>
+</head>
+<body>
+    <header class="header">
+        <h1>Jelajah Sumatera</h1>
+        <nav class="nav-buttons">
+            <a href="profil.html" class="nav-button">Profil</a>
+        </nav>
+    </header>
+
+    <div class="description">
+        <h2>Keindahan Alam Sumatera</h2>
+        <p>Pulau Sumatera, pulau terbesar keenam di dunia, menawarkan keindahan alam yang menakjubkan. Dari pegunungan yang menjulang tinggi hingga pantai-pantai yang eksotis, Sumatera adalah surga bagi para pecinta alam dan petualang.</p>
+        <p>Selain keindahan alam Pulau Sumatera juga mempunyai berbagai macam makanan yang enak dan lezat</p>
+        <p>Kali ini kita akan membahas seputar Pulau Sumatera:</p>
+        <ul>
+            <li>1. Makanan Khas Sumatera</li>
+            <li>2. Rumah Adat Sumatera</li>
+        </ul>
+    </div>
+<div class="container">
+    <div class="index-grid">
+        <div class="index-item">
+            <img src="Aset/pempek1.webp" alt="pempek" onclick="openLightbox(this.src)">
+            <div class="index-deskripsi">
+                <h2>Makanan Khas Sumatera</h2>
+                <p>Beberapa makanan khas Sumatera yang menggoyang lidah</p>
+                <a href="makanan.html" class="btn">Selengkapnya</a>
+            </div>
+        </div>
+
+        <div class="index-item">
+            <img src="Aset/rumah-gadang.jpg" alt="Se'i" onclick="openLightbox(this.src)">
+            <div class="index-deskripsi">
+                <h2>Makanan Khas Sumatera</h2>
+                <p>Beberapa makanan khas Sumatera yang menggoyang lidah</p>
+                <a href="rumahadat.html" class="btn">Selengkapnya</a>
+            </div>
+        </div>
+        </div>
+        
+    
+<script>
+  let slideIndex = 0;
+  const slides = document.querySelectorAll('.slide');
+  const totalSlides = slides.length;
+
+  function changeSlide(n) {
+      slideIndex += n;
+      if (slideIndex >= totalSlides) {
+          slideIndex = 0;
+      } else if (slideIndex < 0) {
+          slideIndex = totalSlides - 1;
+      }
+      updateSlider();
+  }
+
+  function updateSlider() {
+      const slider = document.querySelector('.slider');
+      slider.style.transform = `translateX(-${slideIndex * 100}%)`;
+  }
+</script>
+</body>
+<footer>
+    <p>&copy; 2024 Pulau Sumatera. E.P.S</p>
+</footer>
+</html>

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profil Diri</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #ffffff;
+            line-height: 1.6;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 30px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+            width: 80%;
+            max-width: 600px;
+            text-align: center;
+        }
+
+        .profile-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid #ffffff;
+            margin-bottom: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .profile-img:hover {
+            transform: scale(1.1);
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .tagline {
+            font-size: 1.2em;
+            font-weight: 300;
+            margin-bottom: 20px;
+        }
+
+        .bio {
+            margin-bottom: 30px;
+            font-size: 1.1em;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .social-link {
+            color: #ffffff;
+            font-size: 24px;
+            transition: transform 0.3s ease;
+        }
+
+        .social-link:hover {
+            transform: translateY(-5px);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in {
+            animation: fadeIn 1s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <div class="container fade-in">
+        <img src="Aset/WhatsApp Image 2024-08-19 at 20.29.02.jpeg" alt="Profil" class="profile-img">
+        <h1>Nama: Erlan Eka Putra Susanto</h1>
+        <p class="tagline">Kelas: XI PPLG 2</p>
+        <p class="tagline">Absen: 12</p>
+        <p class="bio">
+            Saya adalah seorang pelajar di SMKN 1 Sayung. Hobi saya adalah bermain bola voli terkadang saya juga sering memancing ikan di tambak. 
+        </p>
+        <div class="social-links">
+            <a href="https://www.linkedin.com/in/johndoe" target="_blank" class="social-link">
+                <i class="fab fa-linkedin"></i>
+            </a>
+         </div>
+
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            document.querySelector('.container').classList.add('fade-in');
+        });
+    </script>
+</body>
+</html>
